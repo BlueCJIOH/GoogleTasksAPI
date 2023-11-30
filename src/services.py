@@ -25,7 +25,7 @@ def get_lists() -> list:
     return items
 
 
-def create_list(len_) -> None:
+def create_list(len_: int) -> None:
     try:
         for el in range(len_):
             service.tasklists().insert(body={"title": f"mylist{el}"}).execute()
@@ -34,7 +34,7 @@ def create_list(len_) -> None:
         logging.error(err)
 
 
-def create_task(len_, task_lists):
+def create_task(len_: int, task_lists: list):
     try:
         for list_ in task_lists:
             for task in range(len_):
