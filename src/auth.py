@@ -9,7 +9,7 @@ from googleapiclient.errors import HttpError
 
 def create_service(API_NAME, SCOPES):
     creds = None
-    if os.path.exists("../token.json"):
+    if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:

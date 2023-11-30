@@ -13,7 +13,7 @@ service = create_service(API_NAME, SCOPES)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 
-def get_lists():
+def get_lists() -> list:
     response = service.tasklists().list().execute()
     items = [el["id"] for el in response.get("items")]
     nextPageToken = response.get("nextPageToken")
@@ -25,7 +25,7 @@ def get_lists():
     return items
 
 
-def create_list(len_):
+def create_list(len_) -> None:
     try:
         for el in range(len_):
             service.tasklists().insert(body={"title": f"mylist{el}"}).execute()
@@ -52,7 +52,7 @@ def create_task(len_, task_lists):
         logging.error(err)
 
 
-def update_task_lists(task_lists):
+def update_task_lists(task_lists: list) -> None:
     try:
         for list_ in task_lists:
             response = (
@@ -98,9 +98,9 @@ def update_task_lists(task_lists):
                         task=task[0],
                         body={
                             "due": (
-                                datetime.datetime.now() + datetime.timedelta(hours=1)
-                            ).isoformat()
-                            + "Z"
+                                           datetime.datetime.now() + datetime.timedelta(hours=1)
+                                   ).isoformat()
+                                   + "Z"
                         },
                     ).execute()
         logging.info("successfully finished")
